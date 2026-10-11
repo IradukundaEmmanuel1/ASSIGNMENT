@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post</title>
+</head>
+<body>
+    <h2>Manage Blog Posts</h2>
+
+    <table border="1" width="100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.content }}</td>
+                <td>{{ post.date_posted }}</td>
+                <td>
+                    <!-- JavaScript alerts added to make the buttons do something immediately -->
+                    <button type="button" onclick="alert('Viewing full details for: {{ post.title }}')">View</button>
+
+                    <button type="button" onclick="alert('Opening editor for: {{ post.title }}')">Edit</button>
+
+                    <!-- Delete triggers your Django backend URL to actually remove the record -->
+                    <a href="{% url 'Blog_Post_Delete' post.id %}">
+                        <button type="button">Delete</button>
+                    </a>
+                </td>
+            </tr>
+
+            {% empty %}
+            <!-- This sample data will display only when your database is completely empty -->
+            <tr>
+                <td>1</td>
+                <td>Firewall Architecture Comparison</td>
+                <td>Evaluating operational differences between modern enterprise firewalls...</td>
+                <td>Jan. 10, 2026</td>
+                <td>
+                    <button type="button" onclick="alert('Viewing full details for: Firewall Architecture Comparison')">View</button>
+                    <button type="button" onclick="alert('Opening editor for: Firewall Architecture Comparison')">Edit</button>
+                    <button type="button" onclick="alert('Cannot delete sample data. Add a real post to the database first!')">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Python WinRM Automation</td>
+                <td>Building a desktop GUI to automate remote server backups...</td>
+                <td>Mar. 15, 2026</td>
+                <td>
+                    <button type="button" onclick="alert('Viewing full details for: Python WinRM Automation')">View</button>
+                    <button type="button" onclick="alert('Opening editor for: Python WinRM Automation')">Edit</button>
+                    <button type="button" onclick="alert('Cannot delete sample data. Add a real post to the database first!')">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
